@@ -18,6 +18,11 @@ class CollectionViewCell: UICollectionViewCell {
         return iv
     }()
 
+    public func configure(with image: UIImage) {
+        self.imageView.image = image
+        self.configureImageView()
+    }
+
     func configureImageView () {
         self.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +32,12 @@ class CollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
+        print("prepareForReuse")
     }
 
 }
