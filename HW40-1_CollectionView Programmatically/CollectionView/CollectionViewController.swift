@@ -12,10 +12,22 @@ class CollectionViewController: UIViewController {
         private var images: [UIImage] = []
 
         private  let collectionView: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .vertical
 
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            let itemSpace:   Double = 5
+            let columnCount: Double = 2
+
+            // The calculation method by using different devices to make sure the image will fit in View.
+            let width = floor((UIScreen.main.bounds.width - itemSpace * (columnCount - 1)) / columnCount)
+
+            let flowLayout = UICollectionViewFlowLayout()
+            flowLayout.scrollDirection = .vertical
+
+            flowLayout.itemSize                = CGSize(width: width, height: width)
+            flowLayout.estimatedItemSize       = .zero
+            flowLayout.minimumLineSpacing      = itemSpace
+            flowLayout.minimumInteritemSpacing = itemSpace
+
+            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
             collectionView.backgroundColor = .systemBackground
             collectionView.alwaysBounceVertical = true
             return collectionView
@@ -25,7 +37,10 @@ class CollectionViewController: UIViewController {
             super.viewDidLoad()
 
             collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+
             configureCollectionView()
+
+            print("Into the CollectionView")
 
         }
 
@@ -72,7 +87,8 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UICollectionViewDataSource {
     // To show how many numberOfItem
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        21
+        print(images.count)
+        return 21
     }
 
     // dequeue Cell
@@ -97,11 +113,8 @@ extension CollectionViewController: UICollectionViewDelegate {
         let webVC = WebViewController()
         webVC.url = placesAndUrl[indexPath.row].locationURL
         present(webVC, animated: true)
-
     }
 }
 
-extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 
-    }
 

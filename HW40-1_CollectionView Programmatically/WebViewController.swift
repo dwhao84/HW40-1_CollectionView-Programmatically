@@ -11,26 +11,63 @@ import WebKit
 class WebViewController: UIViewController {
 
     var webView: WKWebView!
-
     var url: String?
+
+    private let backButton: UIButton = {
+        let backButton = UIButton(type: .system)
+        var config = UIButton.Configuration.tinted()
+        var title = AttributedString("Back")
+        title.font = UIFont.systemFont(ofSize: 10)
+        config.background.backgroundColor = .systemBlue
+        config.attributedTitle = title
+        config.baseBackgroundColor = .systemBlue
+        backButton.configuration = config
+        return backButton
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+
+        let myURL = URL(string: url!)
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+
+        print("Into the WebViewController")
     }
 
 
-
-    func constriantWebView () {
-        view.addSubview(webView)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        view = webView
     }
-
 }
+
+extension WebViewController: UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate {
+
+    // WKUIDelegate
+    func webViewDidClose(_ webView: WKWebView) {
+        webView.uiDelegate?.webViewDidClose!(webView)
+        print("webViewDidClose")
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        backButton.isHidden = !webView.canGoBack
+    }
+
+    // WKNavigationDelegate
+    func goBack() {
+
+    }
+
+    func goForward () {
+
+    }
+}
+
+

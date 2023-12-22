@@ -39,5 +39,4 @@ class CollectionViewCell: UICollectionViewCell {
         self.imageView.image = nil
         print("prepareForReuse")
     }
-
 }
