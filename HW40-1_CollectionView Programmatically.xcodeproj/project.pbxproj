@@ -55,6 +55,7 @@
 		D3820EF42B34971E00254C1D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D3820EF92B349B3A00254C1D /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		D3820EFE2B349CE300254C1D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		D3820F022B35FDAC00254C1D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 		D3820EC12B34965000254C1D /* HW40-1_CollectionView Programmatically */ = {
 			isa = PBXGroup;
 			children = (
+				D3820F022B35FDAC00254C1D /* README.md */,
 				D3820EFE2B349CE300254C1D /* WebViewController.swift */,
 				D3820EF62B349AEB00254C1D /* Supporting Files */,
 				D3820EF82B349B1E00254C1D /* CollectionView */,
