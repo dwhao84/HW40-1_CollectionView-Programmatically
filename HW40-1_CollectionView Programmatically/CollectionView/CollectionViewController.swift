@@ -29,7 +29,7 @@ class CollectionViewController: UIViewController {
 
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
             collectionView.backgroundColor = .systemBackground
-            collectionView.alwaysBounceVertical = true
+
             return collectionView
         }()
 
